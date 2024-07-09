@@ -83,9 +83,9 @@ void app_main(void)
     // mqtt_init_start(&mqtt_h);
     // Twai start
     twai_install_start(&twai_h);
-    // Tasks
-    // xTaskCreatePinnedToCore(twai_receive_task, "TWAI_rx", 4096, &mqtt_h, RX_TASK_PRIO, NULL, tskNO_AFFINITY);
-    // xTaskCreatePinnedToCore(twai_transmit_task, "TWAI_tx", 4096, &twai_h, TX_TASK_PRIO, NULL, tskNO_AFFINITY);
+    //task
+    xTaskCreate(twai_receive_task, "TWAI_rx", 1024*5, &mqtt_h, RX_TASK_PRIO, NULL );
+    xTaskCreate(twai_transmit_task, "TWAI_tx", 1024*5, &twai_h, TX_TASK_PRIO, NULL);
     server = start_webserver();
     // xTaskCreate(mqtt_receive_task, "MQTT_tx", 4096, NULL, TX_TASK_PRIO, NULL);
 

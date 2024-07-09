@@ -116,6 +116,7 @@ static esp_err_t echo_handler(httpd_req_t *req)
                 // Send CAN here
                 char brake_data[MAX_LENGTH_DATA];
                 sprintf(brake_data, "#%d=%d!\r\n", ID_TARGET_EGN_CTRL_NODE, brake_msg->valueint);
+                printf("brake: %d\n",brake_msg->valueint);
                 twai_msg brake_msg = {
                     .type_id = {
                         .msg_type = ID_MSG_TYPE_CMD_FRAME,
@@ -135,6 +136,7 @@ static esp_err_t echo_handler(httpd_req_t *req)
                 char steer_data[MAX_LENGTH_DATA];
                 char eng_data[MAX_LENGTH_DATA];
                 sprintf(steer_data, "#%d=%d\r\n", ID_TARGET_STEER_CTRL_NODE, steering);
+                
                 twai_msg steer_msg = {
                     .type_id = {
                         .msg_type = ID_MSG_TYPE_CMD_FRAME,

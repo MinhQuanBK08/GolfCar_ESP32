@@ -465,7 +465,7 @@ void twai_transmit_multi_task(void *arg)
     twai_transmit_single(send_msg);
     /* Transmit first-after frame */
     for (int i = 1; i < num_packets; i++)
-    {
+    { 
         printf("num pakce:%d\n", num_packets);
         printf("remaining_bytes:%d\n", remaining_bytes);
         if (i == num_packets - 1)
@@ -488,6 +488,7 @@ void twai_transmit_multi_task(void *arg)
         // #endif
     }
     // vTaskDelete(NULL);
+    vTaskDelay(pdMS_TO_TICKS(50)); 
 }
 /* Function that transmit single frame for multil-msg */
 void twai_transmit_single_for_multi(void *arg)

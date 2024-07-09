@@ -191,7 +191,7 @@
 
       const speed = { value: 0, min: -8, max: 8, id: "speed-value" };
       const angle = { value: 0, min: -5, max: 5, id: "angle-value" };
-      const brake = 0;
+      let brake = 0;
       function updateValue(control, change, button) {
         control.value += change;
         if (control.value < control.min) control.value = control.min;
@@ -226,6 +226,9 @@
           this.style.color = "white";
           brake = 1;
           sendControlValues({ brake: 1 }); // Send message indicating braking is engaged
+          // Your existing code to reset the speed value or other related actions
+          speed.value = 0;
+          document.getElementById(speed.id).innerText = speed.value;
         } else {
           // Disengage brake
           this.style.backgroundColor = "green";
@@ -233,10 +236,6 @@
           brake = 0; // Adjust for visibility if necessary
           sendControlValues({ brake: 0 }); // Send message indicating braking is not engaged
         }
-
-        // Your existing code to reset the speed value or other related actions
-        speed.value = 0;
-        document.getElementById(speed.id).innerText = speed.value;
 
         // Add active class for visual feedback, if needed
         this.classList.add("active");
